@@ -1,0 +1,239 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+syntax on
+
+set noerrorbells
+set guicursor=
+
+set relativenumber
+set nohlsearch
+set hidden
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set nu
+set nowrap
+set smartcase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+set termguicolors
+set scrolloff=8
+set noshowmode
+highlight ColorColumn ctermbg = 0 guibg = lightgrey
+let s:fontsize = 12
+function! AdjustFontSize(amount)
+  let s:fontsize = s:fontsize+a:amount
+  :execute "GuiFont! Consolas:h" . s:fontsize
+endfunction
+nnoremap <C-h> :tabprevious<CR>
+nnoremap <C-l> :tabnext<CR>
+noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
+noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
+inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
+inoremap <C-ScrollWheelDown> <Esc>:call AdjustFontSize(-1)<CR>a
+call plug#begin('~/.vim/plugged')
+
+Plug 'vim-utils/vim-man'
+Plug 'xabikos/vscode-react'
+Plug 'leafgarland/typescript-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'jremmen/vim-ripgrep'
+Plug 'scrooloose/nerdtree'
+"Plug 'tsony-tsonev/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
+Plug 'scrooloose/nerdcommenter'
+"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'mbbill/undotree'
+Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.7' }
+
+Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'morhetz/gruvbox'
+
+Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+Plug 'honza/vim-snippets'
+Plug 'mattn/emmet-vim'
+Plug 'sickill/vim-monokai'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'gryf/wombat256grf'
+Plug 'sainnhe/sonokai'
+" Initialize plugin system
+call plug#end()
+
+
+
+let g:sonokai_style = 'shusia'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+
+colorscheme sonokai
+"colorscheme afterglow
+"colorscheme gruvbox
+"set background=dark
+
+
+if executable('rg')
+    let g:rg_derive_root='true'
+endif
+let loaded_matchparen = 1
+let mapleader = " "
+
+let g:netrw_browse_split = 2
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+
+nnoremap <leader>j :wincmd h<CR>
+nnoremap <leader>k :wincmd j<CR>
+nnoremap <leader>l :wincmd k<CR>
+nnoremap <leader>; :wincmd l<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <Leader>ps :Rg<SPACE>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
+nnoremap <silent> <Leader>gd : YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
+
+
+" set the runtime path to include Vundle and initialize
+filetype plugin indent on    " required
+map <F12> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+exec "w"
+if &filetype == 'c'
+exec "!gcc % -o %<"
+exec "!time ./%<"
+elseif &filetype == 'cpp'
+exec "!g++ % -o %<"
+exec "!time ./%<"
+elseif &filetype == 'java'
+exec "!javac %"
+exec "!time java -cp %:p:h %:t:r"
+elseif &filetype == 'sh'
+exec "!time bash %"
+elseif &filetype == 'python'
+exec "!time python3.8 %"
+elseif &filetype == 'html'
+exec "!firefox % &"
+elseif &filetype == 'go'
+exec "!go build %<"
+exec "!time go run %"
+elseif &filetype == 'mkd'
+exec "!~/.vim/markdown.pl % > %.html &"
+exec "!firefox %.html &"
+endif
+endfunc
+
+highlight link htmlTag htmlTagName
+highlight link htmlEndTag htmlTagName
+
+
+
+au GUIEnter * simalt ~x
+set hls
+set is
+set cb=unnamed
+set ts=4
+set sw=4
+set si
+
+
+inoremap { {}<Left>
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {{ {
+inoremap {} {}
+
+
+au GUIEnter * simalt ~x
+set hls
+set is
+set cb=unnamed
+set ts=4
+set sw=4
+set si
+
+cd ~/Documents/vimpsets
+"cd D:\codeforces\vimpsets
+"nnoremap <C-h> :cd C:\Users\User\Desktop\html<CR>
+"nnoremap <C-7> :cd D:\ReactTut\react-app\my-app\src<CR>
+"nnoremap <F1> :cd D:\codeforces\vimpsets<CR>
+"nnoremap <F2> :cd D:\codeforces\vimcontest<CR>
+"nnoremap <F3> :cd D:\Vim\Java<CR>
+"nnoremap <F4> :cd D:\Vim\Python<CR>
+"nnoremap <C-F> :cd C:\Users\User\Desktop\FCC - DP<CR>
+"nnoremap <C-F3> :cd D:\Algorithms\Java<CR>
+"nnoremap <C-F4> :cd D:\Algorithms\Python<CR>
+"nnoremap <C-F1> :cd D:\Algorithms\C++<CR>
+"nnoremap <C-F2> :cd C:\Users\User\Desktop\Record Programs<CR>
+"nnoremap <C-F5> :cd C:\Users\User\Desktop\Brilliant-Pro<CR>
+"nnoremap <F5> :cd D:\C++\Test<CR>
+"nnoremap <F6> :cd D:\C++\Algorithms and Datastructures<CR>
+"nnoremap <F7> :cd C:\Users\User\Desktop\After 12th\Graphs<CR>
+
+inoremap { {}<Left>
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {{ {
+inoremap {} {}
+
+autocmd filetype cpp nnoremap <F9> :!g++ -o  %:r.out % -std=c++11<CR>
+autocmd filetype cpp nnoremap <F10> :!./%:r.out<CR>
+"autocmd filetype cpp nnoremap <C-C> :s/^\(\s*\)/\1\/\/<CR> :s/^\(\s*\)\/\/\/\//\1<CR> $
+
+autocmd filetype java nnoremap <F10> :!java -cp %:p:h %:t:r<CR>
+autocmd filetype java nnoremap <F9> :!javac %<CR>
+
+autocmd filetype python nnoremap <F9> :exec '!python' shellescape(@%, 1)<cr>
+
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+set nu
+augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave * set rnu
+    autocmd BufLeave,FocusLost,InsertEnter * set nornu
+augroup END
+
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg1 = substitute(arg1, '!', '\!', 'g')
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg2 = substitute(arg2, '!', '\!', 'g')
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let arg3 = substitute(arg3, '!', '\!', 'g')
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      if empty(&shellxquote)
+        let l:shxq_sav = ''
+        set shellxquote&
+      endif
+      let cmd = '"' . $VIMRUNTIME . '\diff"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  let cmd = substitute(cmd, '!', '\!', 'g')
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  if exists('l:shxq_sav')
+    let &shellxquote=l:shxq_sav
+  endif
+endfunction
