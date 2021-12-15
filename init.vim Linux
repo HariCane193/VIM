@@ -76,6 +76,7 @@ let g:sonokai_enable_italic = 1
 let g:sonokai_disable_italic_comment = 1
 
 colorscheme sonokai
+"
 "colorscheme afterglow
 "colorscheme gruvbox
 "set background=dark
@@ -91,11 +92,13 @@ let g:netrw_browse_split = 2
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
-nnoremap <leader>j :wincmd h<CR>
-nnoremap <leader>k :wincmd j<CR>
-nnoremap <leader>l :wincmd k<CR>
-nnoremap <leader>; :wincmd l<CR>
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>s :split<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
@@ -162,23 +165,6 @@ set ts=4
 set sw=4
 set si
 
-cd ~/Documents/vimpsets
-"cd D:\codeforces\vimpsets
-"nnoremap <C-h> :cd C:\Users\User\Desktop\html<CR>
-"nnoremap <C-7> :cd D:\ReactTut\react-app\my-app\src<CR>
-"nnoremap <F1> :cd D:\codeforces\vimpsets<CR>
-"nnoremap <F2> :cd D:\codeforces\vimcontest<CR>
-"nnoremap <F3> :cd D:\Vim\Java<CR>
-"nnoremap <F4> :cd D:\Vim\Python<CR>
-"nnoremap <C-F> :cd C:\Users\User\Desktop\FCC - DP<CR>
-"nnoremap <C-F3> :cd D:\Algorithms\Java<CR>
-"nnoremap <C-F4> :cd D:\Algorithms\Python<CR>
-"nnoremap <C-F1> :cd D:\Algorithms\C++<CR>
-"nnoremap <C-F2> :cd C:\Users\User\Desktop\Record Programs<CR>
-"nnoremap <C-F5> :cd C:\Users\User\Desktop\Brilliant-Pro<CR>
-"nnoremap <F5> :cd D:\C++\Test<CR>
-"nnoremap <F6> :cd D:\C++\Algorithms and Datastructures<CR>
-"nnoremap <F7> :cd C:\Users\User\Desktop\After 12th\Graphs<CR>
 
 inoremap { {}<Left>
 inoremap {<CR> {<CR>}<Esc>O
